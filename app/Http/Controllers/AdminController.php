@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Trajet;
 
 class AdminController extends Controller
 {
@@ -14,13 +15,14 @@ class AdminController extends Controller
     {
         
     }
-    public function Users(){
+    public function users(){
         $users = User::all(); 
         // dd($users);
         return view('admin.listeUser', ['users' => $users]);
     }
-    public function Annonces(){
-        $annonces = 
+    public function trajets(){
+        $trajets =  Trajet::all();
+        return view('admin.listeTrajet', ['trajets' => $trajets]);
     }
     /**
      * Show the form for creating a new resource.

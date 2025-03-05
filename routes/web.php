@@ -20,5 +20,6 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('oauth/{provider}/redirect', [SocialiteAuthController::class,'redirect'])->name('oauth.redirect');
 Route::get('oauth/{provider}/callback', [SocialiteAuthController::class,'authenticate']);
-Route::get('dashboard/user',[AdminController::class ,'Users']);
+Route::get('dashboard/users',[AdminController::class ,'users']);
+Route::get('dashboard/trajets',[AdminController::class ,'trajets']);
 require __DIR__.'/auth.php';

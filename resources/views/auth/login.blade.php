@@ -1,3 +1,6 @@
+@php
+    use App\Enums\Provider;
+@endphp
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -44,4 +47,14 @@
             </x-primary-button>
         </div>
     </form>
+    <div class="flex justify-center items-center gap-7">
+                @foreach(Provider::values() as $provider)
+                    <a
+                        href="{{ route('oauth.redirect', ['provider' => $provider]) }}"
+                        class="bg-indigo-50 p-2 rounded-full"
+                    >
+                    {{$provider}}
+                    </a>
+                @endforeach
+            </div>
 </x-guest-layout>

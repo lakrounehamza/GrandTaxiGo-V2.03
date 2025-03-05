@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialiteAuthController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,5 +20,5 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('oauth/{provider}/redirect', [SocialiteAuthController::class,'redirect'])->name('oauth.redirect');
 Route::get('oauth/{provider}/callback', [SocialiteAuthController::class,'authenticate']);
-
+Route::get('dashboard/user',[AdminController::class ,'Users']);
 require __DIR__.'/auth.php';

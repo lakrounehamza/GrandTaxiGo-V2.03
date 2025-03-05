@@ -21,5 +21,9 @@ Route::middleware('auth')->group(function () {
 Route::get('oauth/{provider}/redirect', [SocialiteAuthController::class,'redirect'])->name('oauth.redirect');
 Route::get('oauth/{provider}/callback', [SocialiteAuthController::class,'authenticate']);
 Route::get('dashboard/users',[AdminController::class ,'users']);
-Route::get('dashboard/trajets',[AdminController::class ,'trajets']);
+Route::get('dashboard/trajets',[AdminController::class ,'trajets'])->name('listeTrajet');
+Route::get('dashboard/trajets/accepter/{id}',[AdminController::class ,'accepter'])->name('trajet.accepter');
+Route::get('dashboard/trajets/annule/{id}',[AdminController::class ,'annule'])->name('trajet.annule');
+Route::get('dashboard/trajets/destroy/{id}',[AdminController::class ,'destroy'])->name('trajet.destroy');
+// Route::get('dashboard/trajets/',[AdminController::class ,'trajets']);
 require __DIR__.'/auth.php';

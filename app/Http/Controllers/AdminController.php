@@ -27,10 +27,31 @@ class AdminController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function  accepter(string  $id){
+        $trajet = Trajet::find($id);
+        if (!$trajet) {
+            return redirect()->back()->with('error', 'Trajet non trouvé.');
+        }
+    
+        $trajet->update(['statut' => 'complet']);
+    
+        return redirect('dashboard/trajets');
+    }
+    public function  annule(string  $id){
+        $trajet = Trajet::find($id);
+        if (!$trajet) {
+            return redirect()->back()->with('error', 'Trajet non trouvé.');
+        }
+    
+        $trajet->update(['statut' => 'annule']);
+    
+        return redirect('dashboard/trajets');
+    }
     public function create()
     {
         //
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -69,6 +90,11 @@ class AdminController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $trajet = Trajet::find($id);
+        if (!$trajet) {
+            return redirect()->back()->with('error', 'Trajet non trouvé.');
+        }
+        $trajet->delete();
+        return redirect('dashboard/trajets');
     }
 }

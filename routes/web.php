@@ -5,6 +5,7 @@ use App\Http\Controllers\SocialiteAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PassagerController;
+use  App\Http\Controllers\ChauffeurController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,5 +35,7 @@ Route::get('dashboard/trajets/destroy/{id}',[AdminController::class ,'destroy'])
 Route::get('statistic/',[AdminController::class,'statistic'])->name('admin.statistic');
 // Route::get('dashboard/trajets/',[AdminController::class ,'trajets']);
 Route::get('home/',[ReservationController::class,'index'])->name('passager.index');
+Route::get('home/reservation',[ChauffeurController::class,'reservations'])->name('chauffeur.reservations');
+Route::get('home/trajet',[ChauffeurController::class,'trajets'])->name('chauffeur.trajets');
 Route::get('create/',[ReservationController::class,'create'])->name('passager.create');
 require __DIR__.'/auth.php';

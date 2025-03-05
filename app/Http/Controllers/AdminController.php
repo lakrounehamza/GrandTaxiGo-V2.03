@@ -52,7 +52,13 @@ class AdminController extends Controller
     {
         //
     }
-    
+    public function  statistic(){
+        $nombreUser  = User::count();
+        $nombreTrajet = Trajet::count();
+        $nombreReservation = Reservation::count();
+        // dd($nombreUser);
+        return view('admin.statistic',['nombreUser'=>$nombreUser,'nombreTrajet'=>$nombreTrajet,'nombreReservation'=>$nombreReservation]);
+    }
     public function  banni(string $id){
         return redirect('dashboard/users');
     }

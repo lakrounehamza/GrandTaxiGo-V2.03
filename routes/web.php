@@ -30,5 +30,6 @@ Route::get('dashboard/trajets',[AdminController::class ,'trajets'])->name('liste
 Route::get('dashboard/trajets/accepter/{id}',[AdminController::class ,'accepter'])->name('trajet.accepter');
 Route::get('dashboard/trajets/annule/{id}',[AdminController::class ,'annule'])->name('trajet.annule');
 Route::get('dashboard/trajets/destroy/{id}',[AdminController::class ,'destroy'])->name('trajet.destroy');
+Route::get('statistic/',[AdminController::class,'statistic'])->name('admin.statistic');
 // Route::get('dashboard/trajets/',[AdminController::class ,'trajets']);
 require __DIR__.'/auth.php';

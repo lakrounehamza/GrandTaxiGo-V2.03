@@ -72,6 +72,7 @@
                                     @else
                                     non disponible
                                     @endif 
+                                    <a href="">edit</a>
                                 </p>
                                 @endforeach
                             </div>
@@ -161,6 +162,7 @@
             @else
             non disponible
             @endif 
+               
             </td> 
             @if($reservation->statut == "confirmee")
             <td class="px-6 py-4 whitespace-nowrap  text-sm font-medium">

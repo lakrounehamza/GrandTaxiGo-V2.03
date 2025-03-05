@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Trajet;
+use  App\Models\Reservation;
 
 class AdminController extends Controller
 {
@@ -52,7 +53,21 @@ class AdminController extends Controller
         //
     }
     
+    public function  banni(string $id){
+        return redirect('dashboard/users');
+    }
+    public function detail(string $id){
+        $user = User::find($id); 
+        $trajets  = Trajet::where('id_chauffeur',"=",$id)->get();
 
+        $reservations = Reservation::join('trajets', 'reservations.id_trajet', '=', 'trajets.id')
+    ->join('users', 'reservations.id_passager', '=', 'users.id')
+    ->where('trajets.id_chauffeur', $id)
+    ->select('reservations.*', 'users.name','users.email','trajets.statut as disponibilite', 'trajets.depart', 'trajets.arrive')
+    ->get();
+                // dd($reservations);
+        return  view('admin.detail',['user'=>$user,'trajets'=>$trajets,'reservations'=>$reservations]);
+    }
     /**
      * Store a newly created resource in storage.
      */

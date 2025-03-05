@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use  App\Models\Reservation;
 
 class ReservationController extends Controller
 {
@@ -36,6 +37,27 @@ class ReservationController extends Controller
     public function show(string $id)
     {
         //
+    }
+    public function accepte(string  $id){
+        $reservation =  Reservation::find($id);
+        if($reservation)
+        $reservation->update(['statut'=>"confirmee"]);
+        $query = Reservation::where('reservations.id', '=', $id)
+        ->join('trajets', 'trajets.id', '=', 'reservations.id_trajet')
+        ->select('trajets.id_chauffeur')
+        ->first();
+            return redirect('dashboard/users/detail/'.$query->id_chauffeur);
+
+    }
+    public function  annule(string $id){
+        $reservation =  Reservation::find($id);
+        if($reservation)
+        $reservation->update(['statut'=>"annule"]);
+        $query = Reservation::where('reservations.id', '=', $id)
+        ->join('trajets', 'trajets.id', '=', 'reservations.id_trajet')
+        ->select('trajets.id_chauffeur')
+        ->first();
+            return redirect('dashboard/users/detail/'.$query->id_chauffeur);
     }
 
     /**

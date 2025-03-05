@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Trajet;
 
 class PassagerController extends Controller
 {
@@ -11,15 +12,13 @@ class PassagerController extends Controller
      */
     public function index()
     {
-        //
-    }
+        }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
     }
 
     /**

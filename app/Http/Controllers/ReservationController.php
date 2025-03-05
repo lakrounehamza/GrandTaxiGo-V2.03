@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use  App\Models\Reservation;
+use App\Models\Trajet;
 
 class ReservationController extends Controller
 {
@@ -12,7 +13,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $trajets = Trajet::all();
+        return  view('passager.home',['trajets'=>$trajets]);
     }
 
     /**
@@ -20,7 +22,8 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        return view('passager.ajouteReservation');
+
     }
 
     /**
@@ -28,7 +31,10 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valide = $request->validate([
+            
+        ]);
+
     }
 
     /**

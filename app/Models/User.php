@@ -46,4 +46,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
+    public function trajet(){
+        return $this->hasMany(Trajet::class);
+    }
+
+    public  function reservation(){
+        return   $this->hasMany(Reservation::class);
+    }
 }

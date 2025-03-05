@@ -34,15 +34,50 @@ class ChauffeurController extends Controller
      */
     public function create()
     {
-        //
+        $id = Auth::user()->id;
+        return view('chauffeur.ajoute',['id'=>$id]);
+    }
+    public function disponible(string $id){
+        $trajet   = Trajet::find($id);
+        if($trajet)
+            $trajet->update(['statut'=>'disponible']);
+            return redirect('home/trajet');
+    }
+    public function annule(string $id){
+        $trajet   = Trajet::find($id);
+        if($trajet)
+            $trajet->update(['statut' => 'annule']);
+        return redirect('home/trajet');
     }
 
+    public function accepte(string  $id){
+        $reservation =  Reservation::find($id);
+        if($reservation)
+        $reservation->update(['statut'=>"confirmee"]);
+        return redirect('home/reservation');
+
+    }
+    public function  annuleReservation(string $id){
+        $reservation =  Reservation::find($id);
+        if($reservation)
+        $reservation->update(['statut'=>"annule"]);
+            return redirect('home/reservation');
+    }
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'statut' =>'required',
+            'depart' => 'required|string|max:255', 
+            'arrive' => 'required|string|max:255',
+            'id_chauffeur' => 'required',
+        ]);
+        // dd($validated);
+        Trajet::create($validated);
+        
+        return redirect('home/reservation');
     }
 
     /**
@@ -74,6 +109,11 @@ class ChauffeurController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $trajet = Trajet::find($id);
+        if (!$trajet) {
+            return redirect()->back()->with('error', 'Trajet non trouvé.');
+        }
+        $trajet->delete();
+        return redirect('home/trajet');
     }
 }

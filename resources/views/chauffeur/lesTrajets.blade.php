@@ -20,12 +20,12 @@
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ">Active</span>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                @if($trajet->statut == 'disponible')
-                <a class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">non disponible</a>
+                @if($trajet->statut == 'annule')
+                <a href="{{route('chauffeur.disponible',$trajet->id)}}" class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">disponible</a>
                 @else 
-                <a class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">disponible</a>
+                <a href="{{route('chauffeur.annule',$trajet->id)}}" class="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">annule</a>
                 @endif
-                <a class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">Delete</a>
+                <a href="{{route('chauffeur.destroy',$trajet->id)}}" class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">Delete</a>
             </td>
         </tr>
         @endforeach

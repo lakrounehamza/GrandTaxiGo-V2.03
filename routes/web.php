@@ -8,6 +8,8 @@ use App\Http\Controllers\PassagerController;
 use  App\Http\Controllers\ChauffeurController;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Auth;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -36,6 +38,17 @@ Route::get('statistic/',[AdminController::class,'statistic'])->name('admin.stati
 // Route::get('dashboard/trajets/',[AdminController::class ,'trajets']);
 Route::get('home/',[ReservationController::class,'index'])->name('passager.index');
 Route::get('home/reservation',[ChauffeurController::class,'reservations'])->name('chauffeur.reservations');
+Route::get('home/reservation/annule/{id}',[ChauffeurController::class,'annuleReservation'])->name('chauffeur.annuleReservation');
+Route::get('home/reservation/accepte/{id}',[ChauffeurController::class,'accepte'])->name('chauffeur.accepte');
 Route::get('home/trajet',[ChauffeurController::class,'trajets'])->name('chauffeur.trajets');
+Route::get('home/trajet/destroy/{id}',[ChauffeurController::class,'destroy'])->name('chauffeur.destroy');
+Route::get('home/trajet/disponible/{id}',[ChauffeurController::class,'disponible'])->name('chauffeur.disponible');
+Route::get('home/trajet/annule/{id}',[ChauffeurController::class,'annule'])->name('chauffeur.annule');
 Route::get('create/',[ReservationController::class,'create'])->name('passager.create');
+Route::get('trajet/create',[ChauffeurController::class,'create'])->name('chauffeur.create');
+Route::post('trajet/store',[ChauffeurController::class,'store'])->name('chauffeur.store');
 require __DIR__.'/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

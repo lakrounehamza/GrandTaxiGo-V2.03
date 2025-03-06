@@ -1,14 +1,11 @@
 import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
+import vue from '@vitejs/plugin-vue';
 
+// https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [
-        laravel({
-            input: [
-                'resources/sass/app.scss',
-                'resources/js/app.js',
-            ],
-            refresh: true,
-        }),
-    ],
+  plugins: [vue()],
+  build: {
+    manifest: true,  // Assurez-vous que le manifeste est généré
+    outDir: 'public/build',  // Le répertoire de sortie
+  },
 });

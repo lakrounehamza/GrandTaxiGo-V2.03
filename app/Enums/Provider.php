@@ -5,7 +5,7 @@ namespace App\Enums;
 enum Provider: string
 {
     case Github = "github";
-    case Twitter = "twitter";
+    case Twitter = "facebock";
     case Google = "google";
 
     public static function values(): array

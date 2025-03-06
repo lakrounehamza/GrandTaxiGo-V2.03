@@ -16,6 +16,8 @@ class RoleMiddeware
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
+
+        echo 'hiii !!!!';
         if (!Auth::check() || Auth::user()->role !== $role) {
 
            return redirect('/login');

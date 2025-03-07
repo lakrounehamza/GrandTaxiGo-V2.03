@@ -48,11 +48,17 @@ class User extends Authenticatable
     }
 
 
-    public function trajet(){
+    public function trajet()
+    {
         return $this->hasMany(Trajet::class);
     }
 
-    public  function reservation(){
+    public  function reservation()
+    {
         return   $this->hasMany(Reservation::class);
+    }
+    public function comments()
+    {
+        return $this->hasMany(Coment::class);
     }
 }

@@ -52,7 +52,9 @@ class ReservationController extends Controller
         ->join('trajets', 'trajets.id', '=', 'reservations.id_trajet')
         ->select('trajets.id_chauffeur')
         ->first();
-            return redirect('dashboard/users/detail/'.$query->id_chauffeur);
+
+        
+            return redirect('dashboard/users/detail/'.$query->id_chauffeur);        
 
     }
     public function  annule(string $id){

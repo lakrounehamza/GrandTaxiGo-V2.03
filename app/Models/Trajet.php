@@ -11,4 +11,8 @@ class Trajet extends Model
     public function    user(){
         return $this->belongsTO(User::class);
     }
+    public function comments()
+{
+    return $this->hasMany(Coment::class);
+}
 }

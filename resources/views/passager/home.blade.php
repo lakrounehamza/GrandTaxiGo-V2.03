@@ -30,7 +30,7 @@
           </ul>
           @if($trajet->statut == 'disponible')
           <div class="mt-8">
-            <a href="#" class="block w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-center py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">Get Started</a>
+            <a href="{{route('trajet.dtaile')}}" class="block w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-center py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">Get Started</a>
           </div>
           @else 
           <div class="mt-8">

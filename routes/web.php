@@ -5,6 +5,7 @@ use App\Http\Controllers\SocialiteAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PassagerController;
 use App\Http\Middeware\RoleMiddeware;
 use  App\Http\Controllers\ChauffeurController;
 use Illuminate\Support\Facades\Route;
@@ -60,5 +61,22 @@ Route::middleware(['auth', 'role:chauffeur'])->group(function () {
 Route::middleware(['auth', 'role:passager'])->group(function () {
     Route::get('home/', [ReservationController::class, 'index'])->name('passager.index');
     Route::get('create/', [ReservationController::class, 'create'])->name('passager.create');
-    Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+    // Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::get('mesreservation',[PassagerController::class,'index'])->name('passager.reservation');
+    Route::get('detail/trajet',[PassagerController::class ,'store'])->name('trajet.dtaile');
 });
+
+
+
+Route::post('/session', 'App\Http\Controllers\StripeController@session')->name('session');
+Route::get('/success', 'App\Http\Controllers\StripeController@success')->name('success');
+
+
+
+use Illuminate\Support\Facades\Mail;
+use App\Models\User;
+use App\Mail\UserInfoQRMail;
+
+ use App\Http\Controllers\sendEmail;
+
+Route::get('send-email', [sendEmail::class, 'sendEmail']);

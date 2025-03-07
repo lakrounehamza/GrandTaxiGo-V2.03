@@ -1,28 +1,25 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use App\Models\Trajet;
-use App\Models\Reservation;
 
-class PassagerController extends Controller
+use Illuminate\Http\Request;
+use App\Models\Coment;
+class comentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $id = Auth::user()->id;
-        $reservation  = Reservation::where('id_passager','=',$id);
-        return view('passager.mesReservation',['reservation'=>$reservation]);
-        }
+        //
+    }
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -30,7 +27,7 @@ class PassagerController extends Controller
      */
     public function store(Request $request)
     {
-        return view('passager.detaile');
+        //
     }
 
     /**
@@ -38,7 +35,12 @@ class PassagerController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $comments = Coment::select('coments.content', 'users.name', 'trajets.depart', 'trajets.destination')
+        ->join('users', 'users.id', '=', 'coments.user_id')
+        ->join('trajets', 'trajets.id', '=', 'coments.trajet_id')
+        ->where('coments.trajet_id',$id)
+        ->get();
+    
     }
 
     /**

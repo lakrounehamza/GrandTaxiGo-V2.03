@@ -1,4 +1,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
+@extends('layouts.navPassager')
+
+@section('content')
 <div class="bg-gray-100">
     <div class="container mx-auto py-12">
         <div class="max-w-lg mx-auto px-4">
@@ -39,3 +42,4 @@
         </div>
     </div>
 </div>
+@endsection

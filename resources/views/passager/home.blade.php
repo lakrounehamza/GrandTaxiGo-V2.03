@@ -1,4 +1,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
+@extends('layouts.navPassager')
+
+@section('content')
 <div class="bg-gray-100 py-12">
   <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-wrap -mx-4">
@@ -25,9 +28,15 @@
               Disponibilité :  @if($trajet->statut == 'annule') non disponible @else disponible @endif
             </li>
           </ul>
+          @if($trajet->statut == 'disponible')
           <div class="mt-8">
             <a href="#" class="block w-full bg-indigo-500 hover:bg-indigo-400 text-white font-semibold text-center py-2 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">Get Started</a>
           </div>
+          @else 
+          <div class="mt-8">
+            <p class="block w-full  bg-black text-white font-semibold text-center py-2 rounded-lg transition duration-300 ease-in-out transform  ">Get Started</p>
+          </div>
+          @endif
         </div>
       </div>
       <!-- end Pricing Table 1 -->
@@ -36,3 +45,4 @@
     </div>
   </div>
 </div>
+@endsection

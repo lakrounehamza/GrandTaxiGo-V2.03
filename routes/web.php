@@ -4,7 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialiteAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\PassagerController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Middeware\RoleMiddeware;
 use  App\Http\Controllers\ChauffeurController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +30,9 @@ Route::get('oauth/{provider}/callback', [SocialiteAuthController::class, 'authen
 require __DIR__ . '/auth.php';
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('dashboard/trajets', [AdminController::class, 'trajets'])->name('listeTrajet');
+
+
     Route::get('statistic/', [AdminController::class, 'statistic'])->name('admin.statistic');
     Route::get('dashboard/users', [AdminController::class, 'users']);
     Route::get('dashboard/users/banni/{id}', [AdminController::class, 'users'])->name('user.banni');
@@ -44,10 +47,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:chauffeur'])->group(function () {
-Route::get('home/reservation', [ChauffeurController::class, 'reservations'])->name('chauffeur.reservations');
-Route::get('home/trajet', [ChauffeurController::class, 'trajets'])->name('chauffeur.trajets');
+    Route::get('home/reservation', [ChauffeurController::class, 'reservations'])->name('chauffeur.reservations');
+    Route::get('home/trajet', [ChauffeurController::class, 'trajets'])->name('chauffeur.trajets');
+    Route::get('home/reservation/annule/{id}', [ChauffeurController::class, 'annuleReservation'])->name('chauffeur.annuleReservation');
+    Route::get('home/reservation/accepte/{id}', [ChauffeurController::class, 'accepte'])->name('chauffeur.accepte');
+    Route::get('home/trajet/destroy/{id}', [ChauffeurController::class, 'destroy'])->name('chauffeur.destroy');
+    Route::get('home/trajet/disponible/{id}', [ChauffeurController::class, 'disponible'])->name('chauffeur.disponible');
+    Route::get('home/trajet/annule/{id}', [ChauffeurController::class, 'annule'])->name('chauffeur.annule');
+    Route::get('trajet/create', [ChauffeurController::class, 'create'])->name('chauffeur.create');
+    Route::post('trajet/store', [ChauffeurController::class, 'store'])->name('chauffeur.store');
 });
 Route::middleware(['auth', 'role:passager'])->group(function () {
-Route::get('home/', [ReservationController::class, 'index'])->name('passager.index');
-Route::get('create/', [ReservationController::class, 'create'])->name('passager.create');
+    Route::get('home/', [ReservationController::class, 'index'])->name('passager.index');
+    Route::get('create/', [ReservationController::class, 'create'])->name('passager.create');
+    Route::post('/payment', [PaymentController::class, 'processPayment'])->name('payment.process');
 });

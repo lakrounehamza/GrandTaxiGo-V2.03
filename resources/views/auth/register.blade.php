@@ -15,22 +15,22 @@
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
-        
+
         <!-- Role -->
         <div class="mt-4">
             <x-input-label for="role" :value="__('Role')" />
-            <select id="role" class="block mt-1 w-full" name="role" required>
-                <option value="admin">Admin</option>
-                <option value="chauffeur">Chauffeur</option>
-                <option value="passager">Passager</option>
+            <select id="role" class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500" name="role" required>
+                <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
+                <option value="chauffeur" {{ old('role') == 'chauffeur' ? 'selected' : '' }}>Chauffeur</option>
+                <option value="passager" {{ old('role') == 'passager' ? 'selected' : '' }}>Passager</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
-        
-        <!-- Image -->
+
+        <!-- Profile Picture -->
         <div class="mt-4">
             <x-input-label for="photo" :value="__('Photo')" />
-            <input id="photo" class="block mt-1 w-full" type="file" name="photo" accept="image/*" required />
+            <x-text-input id="photo" class="block mt-1 w-full" type="file" name="photo" accept="image/*" required />
             <x-input-error :messages="$errors->get('photo')" class="mt-2" />
         </div>
 
@@ -48,6 +48,7 @@
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
 
+        <!-- Actions -->
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
                 {{ __('Already registered?') }}

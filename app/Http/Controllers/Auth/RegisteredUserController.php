@@ -36,21 +36,30 @@ class RegisteredUserController extends Controller
             'photo' => ['required', 'file', 'image', 'mimes:jpg,png,jpeg,gif,svg', 'max:2048'], // Max 2MB
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-         
-        $photoPath = $request->file('photo')->store('photos', 'public');
-        
+
+        // Vérifier si un fichier a bien été téléchargé avant de stocker
+        if ($request->hasFile('photo')) {
+            $photoPath = $request->file('photo')->store('photos', 'public');
+        } else {
+            return back()->withErrors(['photo' => 'Le téléchargement de la photo a échoué.']);
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
-            'photo' => $photoPath,  
+            'photo' => $photoPath,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
-
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        return match ($user->role) {
+            'admin' => redirect()->route('listeTrajet'),
+            'chauffeur' => redirect()->route('chauffeur.reservations'),
+            'passager' => redirect()->route('passager.index'),
+            default => redirect()->route('/'), // Redirection par défaut si aucun rôle ne correspond
+        };
     }
 }
